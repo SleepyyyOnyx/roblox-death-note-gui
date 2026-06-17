@@ -1,5 +1,5 @@
 --[[
-    Death Note Tutorial GUI - Compact Horizontal Banner Version
+    Death Note Tutorial GUI - Compact Vertical Version
     Click the button to open the tutorial, click close or ESC to hide it
 ]]
 
@@ -110,77 +110,57 @@ buttonGui.ResetOnSpawn = false
 buttonGui.DisplayOrder = 5
 buttonGui.Parent = playerGui
 
--- Create compact floating banner button
-local floatingBanner = Instance.new("Frame")
-floatingBanner.Name = "TutorialBanner"
-floatingBanner.Size = UDim2.new(0.25, 0, 0.06, 0)
-floatingBanner.Position = UDim2.new(0.375, 0, 0.01, 0)
-floatingBanner.BackgroundColor3 = Color3.fromRGB(0, 100, 150)
-floatingBanner.BorderSizePixel = 2
-floatingBanner.BorderColor3 = Color3.fromRGB(0, 200, 255)
-floatingBanner.ZIndex = 10
-floatingBanner.Parent = buttonGui
-
-local bannerCorner = Instance.new("UICorner")
-bannerCorner.CornerRadius = UDim.new(0, 8)
-bannerCorner.Parent = floatingBanner
-
--- Banner glow
-local bannerGlow = Instance.new("Frame")
-bannerGlow.Size = UDim2.new(1, 10, 1, 10)
-bannerGlow.Position = UDim2.new(0, -5, 0, -5)
-bannerGlow.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
-bannerGlow.BorderSizePixel = 0
-bannerGlow.BackgroundTransparency = 0.7
-bannerGlow.ZIndex = 8
-bannerGlow.Parent = floatingBanner
-
-local bannerGlowCorner = Instance.new("UICorner")
-bannerGlowCorner.CornerRadius = UDim.new(0, 10)
-bannerGlowCorner.Parent = bannerGlow
-
--- Banner text
-local bannerText = Instance.new("TextLabel")
-bannerText.Size = UDim2.new(1, 0, 1, 0)
-bannerText.BackgroundTransparency = 1
-bannerText.Text = "📖 TUTORIAL"
-bannerText.TextColor3 = Color3.fromRGB(100, 200, 255)
-bannerText.TextSize = 18
-bannerText.Font = Enum.Font.GothamBold
-bannerText.ZIndex = 11
-bannerText.Parent = floatingBanner
-
--- Make banner clickable
+-- Create floating tutorial button (TOP LEFT - original position)
 local floatingBtn = Instance.new("TextButton")
-floatingBtn.Size = UDim2.new(1, 0, 1, 0)
-floatingBtn.BackgroundTransparency = 1
-floatingBtn.BorderSizePixel = 0
-floatingBtn.Text = ""
-floatingBtn.ZIndex = 12
-floatingBtn.Parent = floatingBanner
+floatingBtn.Name = "TutorialButton"
+floatingBtn.Size = UDim2.new(0.12, 0, 0.08, 0)
+floatingBtn.Position = UDim2.new(0.02, 0, 0.02, 0)
+floatingBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 150)
+floatingBtn.BorderSizePixel = 2
+floatingBtn.BorderColor3 = Color3.fromRGB(0, 200, 255)
+floatingBtn.Text = "📖 TUTORIAL"
+floatingBtn.TextColor3 = Color3.fromRGB(100, 200, 255)
+floatingBtn.TextSize = 14
+floatingBtn.Font = Enum.Font.GothamBold
+floatingBtn.ZIndex = 10
+floatingBtn.Parent = buttonGui
 floatingBtn.AutoButtonColor = false
 
--- Banner hover effects
+local btnCorner = Instance.new("UICorner")
+btnCorner.CornerRadius = UDim.new(0, 8)
+btnCorner.Parent = floatingBtn
+
+-- Button glow
+local btnGlow = Instance.new("Frame")
+btnGlow.Size = UDim2.new(1, 10, 1, 10)
+btnGlow.Position = UDim2.new(0, -5, 0, -5)
+btnGlow.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
+btnGlow.BorderSizePixel = 0
+btnGlow.BackgroundTransparency = 0.7
+btnGlow.ZIndex = 8
+btnGlow.Parent = floatingBtn
+
+local btnGlowCorner = Instance.new("UICorner")
+btnGlowCorner.CornerRadius = UDim.new(0, 10)
+btnGlowCorner.Parent = btnGlow
+
+-- Button hover effects
 floatingBtn.MouseEnter:Connect(function()
-    TweenService:Create(floatingBanner, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    TweenService:Create(floatingBtn, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
         BackgroundColor3 = Color3.fromRGB(0, 150, 255),
-    }):Play()
-    TweenService:Create(bannerText, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
         TextColor3 = Color3.fromRGB(200, 220, 255)
     }):Play()
-    TweenService:Create(bannerGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    TweenService:Create(btnGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
         BackgroundTransparency = 0.3
     }):Play()
 end)
 
 floatingBtn.MouseLeave:Connect(function()
-    TweenService:Create(floatingBanner, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    TweenService:Create(floatingBtn, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
         BackgroundColor3 = Color3.fromRGB(0, 100, 150),
-    }):Play()
-    TweenService:Create(bannerText, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
         TextColor3 = Color3.fromRGB(100, 200, 255)
     }):Play()
-    TweenService:Create(bannerGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+    TweenService:Create(btnGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
         BackgroundTransparency = 0.7
     }):Play()
 end)
@@ -211,11 +191,11 @@ glowBg1.BackgroundTransparency = 0.95
 glowBg1.ZIndex = 1
 glowBg1.Parent = screenGui
 
--- COMPACT Main content frame with glow border (smaller, centered)
+-- COMPACT VERTICAL Main content frame - SMALLER AND NARROWER
 local contentFrame = Instance.new("Frame")
 contentFrame.Name = "ContentFrame"
-contentFrame.Size = UDim2.new(0.7, 0, 0.5, 0)
-contentFrame.Position = UDim2.new(0.15, 0, 0.25, 0)
+contentFrame.Size = UDim2.new(0.45, 0, 0.65, 0)
+contentFrame.Position = UDim2.new(0.275, 0, 0.175, 0)
 contentFrame.BackgroundColor3 = Color3.fromRGB(10, 10, 30)
 contentFrame.BorderSizePixel = 3
 contentFrame.BorderColor3 = Color3.fromRGB(0, 150, 255)
@@ -228,8 +208,8 @@ contentCorner.Parent = contentFrame
 
 -- Glow effect around main frame
 local glowFrame = Instance.new("Frame")
-glowFrame.Size = UDim2.new(0.7, 6, 0.5, 6)
-glowFrame.Position = UDim2.new(0.15, -3, 0.25, -3)
+glowFrame.Size = UDim2.new(0.45, 6, 0.65, 6)
+glowFrame.Position = UDim2.new(0.275, -3, 0.175, -3)
 glowFrame.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
 glowFrame.BorderSizePixel = 0
 glowFrame.BackgroundTransparency = 0.7
@@ -240,9 +220,9 @@ local glowCorner = Instance.new("UICorner")
 glowCorner.CornerRadius = UDim.new(0, 22)
 glowCorner.Parent = glowFrame
 
--- COMPACT HEADER SECTION
+-- HEADER SECTION
 local headerFrame = Instance.new("Frame")
-headerFrame.Size = UDim2.new(1, 0, 0.12, 0)
+headerFrame.Size = UDim2.new(1, 0, 0.1, 0)
 headerFrame.BackgroundColor3 = Color3.fromRGB(8, 8, 25)
 headerFrame.BorderSizePixel = 0
 headerFrame.ZIndex = 6
@@ -255,14 +235,14 @@ headerCorner.Parent = headerFrame
 -- Close button
 local closeBtn = Instance.new("TextButton")
 closeBtn.Name = "CloseBtn"
-closeBtn.Size = UDim2.new(0.08, 0, 0.7, 0)
-closeBtn.Position = UDim2.new(0.9, 0, 0.15, 0)
+closeBtn.Size = UDim2.new(0.1, 0, 0.7, 0)
+closeBtn.Position = UDim2.new(0.88, 0, 0.15, 0)
 closeBtn.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
 closeBtn.BorderSizePixel = 2
 closeBtn.BorderColor3 = Color3.fromRGB(0, 200, 255)
 closeBtn.Text = "✕"
 closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeBtn.TextSize = 20
+closeBtn.TextSize = 18
 closeBtn.Font = Enum.Font.GothamBold
 closeBtn.ZIndex = 8
 closeBtn.Parent = headerFrame
@@ -290,36 +270,36 @@ closeBtn.MouseLeave:Connect(function()
     }):Play()
 end)
 
--- Main title - BIGGER FONT
+-- Main title - EVEN BIGGER FONT
 local mainTitle = Instance.new("TextLabel")
 mainTitle.Size = UDim2.new(0.85, 0, 1, 0)
 mainTitle.Position = UDim2.new(0.05, 0, 0, 0)
 mainTitle.BackgroundTransparency = 1
 mainTitle.Text = "TUTORIAL"
 mainTitle.TextColor3 = Color3.fromRGB(100, 200, 255)
-mainTitle.TextSize = 36
+mainTitle.TextSize = 32
 mainTitle.Font = Enum.Font.GothamBlack
 mainTitle.ZIndex = 8
 mainTitle.Parent = headerFrame
 
--- COMPACT SIDEBAR (Hidden for space, use dots instead)
--- CONTENT AREA - BIGGER
+-- CONTENT AREA
 local contentArea = Instance.new("Frame")
-contentArea.Size = UDim2.new(0.95, 0, 0.8, 0)
-contentArea.Position = UDim2.new(0.025, 0, 0.12, 0)
+contentArea.Size = UDim2.new(0.95, 0, 0.85, 0)
+contentArea.Position = UDim2.new(0.025, 0, 0.1, 0)
 contentArea.BackgroundTransparency = 1
 contentArea.ZIndex = 6
 contentArea.Parent = contentFrame
 
 -- Page title - BIGGER FONT
 local pageTitle = Instance.new("TextLabel")
-pageTitle.Size = UDim2.new(1, 0, 0.15, 0)
+pageTitle.Size = UDim2.new(1, 0, 0.14, 0)
 pageTitle.Position = UDim2.new(0, 0, 0, 0)
 pageTitle.BackgroundTransparency = 1
 pageTitle.Text = tutorialPages[1].title
 pageTitle.TextColor3 = tutorialPages[1].color
-pageTitle.TextSize = 38
+pageTitle.TextSize = 40
 pageTitle.Font = Enum.Font.GothamBlack
+pageTitle.TextWrapped = true
 pageTitle.ZIndex = 7
 pageTitle.Parent = contentArea
 
@@ -332,6 +312,7 @@ pageSubtitle.Text = tutorialPages[1].subtitle
 pageSubtitle.TextColor3 = Color3.fromRGB(100, 200, 255)
 pageSubtitle.TextSize = 16
 pageSubtitle.Font = Enum.Font.GothamBold
+pageSubtitle.TextWrapped = true
 pageSubtitle.ZIndex = 7
 pageSubtitle.Parent = contentArea
 
@@ -346,12 +327,12 @@ decorLine.Parent = contentArea
 
 -- Page description - BIGGER FONT
 local pageDesc = Instance.new("TextLabel")
-pageDesc.Size = UDim2.new(0.95, 0, 0.45, 0)
-pageDesc.Position = UDim2.new(0.025, 0, 0.32, 0)
+pageDesc.Size = UDim2.new(1, 0, 0.42, 0)
+pageDesc.Position = UDim2.new(0, 0, 0.32, 0)
 pageDesc.BackgroundTransparency = 1
 pageDesc.Text = tutorialPages[1].description
 pageDesc.TextColor3 = Color3.fromRGB(180, 180, 200)
-pageDesc.TextSize = 18
+pageDesc.TextSize = 20
 pageDesc.Font = Enum.Font.Gotham
 pageDesc.TextWrapped = true
 pageDesc.TextYAlignment = Enum.TextYAlignment.Top
@@ -361,7 +342,7 @@ pageDesc.Parent = contentArea
 -- Progress dots
 local dotsFrame = Instance.new("Frame")
 dotsFrame.Size = UDim2.new(1, 0, 0.08, 0)
-dotsFrame.Position = UDim2.new(0, 0, 0.8, 0)
+dotsFrame.Position = UDim2.new(0, 0, 0.76, 0)
 dotsFrame.BackgroundTransparency = 1
 dotsFrame.ZIndex = 7
 dotsFrame.Parent = contentArea
@@ -369,13 +350,13 @@ dotsFrame.Parent = contentArea
 local dotsLayout = Instance.new("UIListLayout")
 dotsLayout.FillDirection = Enum.FillDirection.Horizontal
 dotsLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-dotsLayout.Padding = UDim.new(0, 8)
+dotsLayout.Padding = UDim.new(0, 6)
 dotsLayout.Parent = dotsFrame
 
 local dotButtons = {}
 for i = 1, #tutorialPages do
     local dot = Instance.new("TextButton")
-    dot.Size = UDim2.new(0, 18, 0, 18)
+    dot.Size = UDim2.new(0, 16, 0, 16)
     dot.BackgroundColor3 = i == 1 and Color3.fromRGB(0, 150, 255) or Color3.fromRGB(50, 50, 100)
     dot.BorderSizePixel = 1
     dot.BorderColor3 = Color3.fromRGB(0, 150, 255)
@@ -397,8 +378,8 @@ end
 
 -- BOTTOM BUTTONS
 local bottomFrame = Instance.new("Frame")
-bottomFrame.Size = UDim2.new(1, 0, 0.08, 0)
-bottomFrame.Position = UDim2.new(0, 0, 0.92, 0)
+bottomFrame.Size = UDim2.new(1, 0, 0.12, 0)
+bottomFrame.Position = UDim2.new(0, 0, 0.88, 0)
 bottomFrame.BackgroundTransparency = 1
 bottomFrame.ZIndex = 6
 bottomFrame.Parent = contentFrame
@@ -406,14 +387,14 @@ bottomFrame.Parent = contentFrame
 -- Previous button
 local prevBtn = Instance.new("TextButton")
 prevBtn.Name = "PrevBtn"
-prevBtn.Size = UDim2.new(0.2, 0, 0.7, 0)
-prevBtn.Position = UDim2.new(0.02, 0, 0.15, 0)
+prevBtn.Size = UDim2.new(0.45, 0, 0.75, 0)
+prevBtn.Position = UDim2.new(0.02, 0, 0.125, 0)
 prevBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 150)
 prevBtn.BorderSizePixel = 2
 prevBtn.BorderColor3 = Color3.fromRGB(0, 150, 255)
 prevBtn.Text = "◀ PREV"
 prevBtn.TextColor3 = Color3.fromRGB(200, 200, 255)
-prevBtn.TextSize = 14
+prevBtn.TextSize = 16
 prevBtn.Font = Enum.Font.GothamBold
 prevBtn.ZIndex = 8
 prevBtn.Parent = bottomFrame
@@ -442,14 +423,14 @@ end)
 -- Next button
 local nextBtn = Instance.new("TextButton")
 nextBtn.Name = "NextBtn"
-nextBtn.Size = UDim2.new(0.2, 0, 0.7, 0)
-nextBtn.Position = UDim2.new(0.78, 0, 0.15, 0)
+nextBtn.Size = UDim2.new(0.45, 0, 0.75, 0)
+nextBtn.Position = UDim2.new(0.53, 0, 0.125, 0)
 nextBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 150)
 nextBtn.BorderSizePixel = 2
 nextBtn.BorderColor3 = Color3.fromRGB(0, 150, 255)
 nextBtn.Text = "NEXT ▶"
 nextBtn.TextColor3 = Color3.fromRGB(200, 200, 255)
-nextBtn.TextSize = 14
+nextBtn.TextSize = 16
 nextBtn.Font = Enum.Font.GothamBold
 nextBtn.ZIndex = 8
 nextBtn.Parent = bottomFrame
@@ -544,5 +525,5 @@ end)
 -- Hide tutorial on startup
 screenGui.Enabled = false
 
-print("✨ Death Note Tutorial GUI - Compact Edition Loaded!")
-print("Click the 📖 TUTORIAL banner to open | Use LEFT/RIGHT or A/D to navigate | ESC to close")
+print("✨ Death Note Tutorial GUI - Compact Vertical Edition Loaded!")
+print("Click the 📖 TUTORIAL button to open | Use LEFT/RIGHT or A/D to navigate | ESC to close")
